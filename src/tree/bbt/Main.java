@@ -1,10 +1,12 @@
 package tree.bbt;
 
+import tree.TreeNode;
+
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        TreeNode root = new TreeNode();
+        TreeNode root = new TreeNode(0);
         Main main = new Main();
         System.out.println("tree is balanced? "+main.isBalanced(root));
     }
