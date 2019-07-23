@@ -10,12 +10,12 @@ public class FreedomTrail {
         //初始化
         int ret = 0;
         char[] keys = key.toCharArray();
-        Map<Character, List<Integer>> map = new HashMap<>();
+        Map<Character, List<Integer>> keyMap = new HashMap<>();
         for (int i = 0; i < keys.length; i++) {
-            if (map.get(keys[i]) == null) {
-                map.put(keys[i], new LinkedList<>());
+            if (keyMap.get(keys[i]) == null) {
+                keyMap.put(keys[i], new LinkedList<>());
             }
-            map.get(keys[i]).add(i);
+            keyMap.get(keys[i]).add(i);
         }
         Map<Character, Map<Integer, Integer>> idxResult = new HashMap<>();
         char[] ringChar = ring.toCharArray();
@@ -32,7 +32,7 @@ public class FreedomTrail {
             char curChar = keys[keyIdx];
 
             //ring中每一个出现curChar的位置计算最小步数
-            List<Integer> curIdxs = map.get(curChar);
+            List<Integer> curIdxs = keyMap.get(curChar);
             Map<Integer, Integer> resultMap = idxResult.get(curChar);
             Map<Integer, Integer> prevResultMap = idxResult.get(prevChar);
             if (keyIdx == 0) {
