@@ -1,6 +1,7 @@
 package tree.postorder;
 
 import sun.reflect.generics.tree.Tree;
+import tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

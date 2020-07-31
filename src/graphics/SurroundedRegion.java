@@ -1,4 +1,4 @@
-package map;
+package graphics;
 
 public class SurroundedRegion {
     public void solve(char[][] board) {

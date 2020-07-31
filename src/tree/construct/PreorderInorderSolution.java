@@ -1,5 +1,7 @@
 package tree.construct;
 
+import tree.TreeNode;
+
 public class PreorderInorderSolution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         return constructTree(preorder, 0, preorder.length, inorder, 0, inorder.length);
