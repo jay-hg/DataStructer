@@ -213,7 +213,7 @@ public class MyArrayList {
                     s1 = m1;
                     t2 = m2;
                 } else {
-                    s1 = m1+1;
+                    s1 = m1 + 1;
                     t2 = m2;
                 }
             } else {
@@ -221,13 +221,57 @@ public class MyArrayList {
                     s2 = m2;
                     t1 = m1;
                 } else {
-                    s2 = m2+1;
+                    s2 = m2 + 1;
                     t1 = m1;
                 }
             }
         }
 
         return list1.array[s1] < list2.array[s2] ? list1.array[s1] : list2.array[s2];
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+        if (length1 > length2) {
+            int[] temp = nums1;
+            nums1 = nums2;
+            nums2 = temp;
+            length1 = nums1.length;
+            length2 = nums2.length;
+        }
+
+
+        //在nums1的[0,length1]内找恰当的分割线
+        //使得nums1[mid1-1] <= nums2[mid2] && nums2[mid2-1] <= nums1[mid1]
+        int left = 0, right = length1;
+        while (left < right) {
+            int mid1 = (left + right + 1) / 2;
+            int mid2 = (length1 + length2 + 1) / 2 - mid1;
+
+            if (nums1[mid1 - 1] > nums2[mid2]) {
+                //下一轮搜索区间[left,mid1-1]
+                right = mid1 - 1;
+            } else {
+                //下一轮搜索区间[mid1,right]
+                left = mid1;
+            }
+        }
+
+        int mid1 = left;
+        int mid2 = (length1 + length2 + 1) / 2 - left;
+        int nums1LeftMax = (mid1 == 0 ? Integer.MIN_VALUE : nums1[mid1 - 1]);
+        int nums2LeftMax = (mid2 == 0 ? Integer.MIN_VALUE : nums2[mid2 - 1]);
+        int nums1RightMin = (mid1 == length1 ? Integer.MAX_VALUE : nums1[mid1]);
+        int nums2RightMin = (mid2 == length2 ? Integer.MAX_VALUE : nums2[mid2]);
+
+        if ((length1 + length2) % 2 == 1) {
+            //总共奇数个节点，取中间那个数
+            return Math.max(nums1LeftMax, nums2LeftMax);
+        } else {
+            //总共偶数个点，取平均值
+            return ((double)(Math.min(nums1RightMin, nums2RightMin) + Math.max(nums1LeftMax, nums2LeftMax))) / 2;
+        }
     }
 
     public static void main(String[] args) {
