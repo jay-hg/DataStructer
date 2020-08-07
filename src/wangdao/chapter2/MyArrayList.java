@@ -1,6 +1,8 @@
 package wangdao.chapter2;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyArrayList {
     private int[] array;
@@ -274,8 +276,26 @@ public class MyArrayList {
         }
     }
 
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> countMap = new HashMap<>(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            Integer count = countMap.get(nums[i]);
+            if (count == null) {
+                count = 0;
+            }
+            count ++;
+            countMap.put(nums[i], count);
+        }
+        for (Map.Entry<Integer, Integer> e : countMap.entrySet()) {
+            if (e.getValue() > nums.length / 2) {
+                return e.getKey();
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
-        MyArrayList list = new MyArrayList(new int[]{1, 2, 3, 1, 4, 6, 8, 10});
+        MyArrayList list = new MyArrayList(new int[]{3,2});
 
 
 //        int min = list.deleteMinNum();
@@ -300,10 +320,12 @@ public class MyArrayList {
 
 //        list.shift(3);
 
-        MyArrayList list1 = new MyArrayList(new int[]{1, 3, 5, 7, 9});
+        /*MyArrayList list1 = new MyArrayList(new int[]{1, 3, 5, 7, 9});
         MyArrayList list2 = new MyArrayList(new int[]{2, 4, 6, 8, 10});
         int mid = list.median(list1, list2);
-        System.out.println(mid);
+        System.out.println(mid);*/
+
+        System.out.println(list.majorityElement(list.array));
         list.printList();
     }
 }
