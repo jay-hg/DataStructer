@@ -12,10 +12,10 @@ public class ListNode {
         if (head == null || head.next == null) {
             return head;
         }
-        return cut(head);
+        return mergeSort(head);
     }
 
-    private ListNode cut(ListNode p) {
+    private ListNode mergeSort(ListNode p) {
         if (p == null || p.next == null) {
             return p;
         }
@@ -34,8 +34,8 @@ public class ListNode {
         }
         previousNode.next = null;
 
-        ListNode r1 = cut(p);
-        ListNode r2 = cut(q);
+        ListNode r1 = mergeSort(p);
+        ListNode r2 = mergeSort(q);
         ListNode ret = merge(r1, r2);
         return ret;
     }
@@ -54,11 +54,17 @@ public class ListNode {
             }
             tail = tail.next;
         }
+        if (p != null) {
+            tail.next = p;
+        }
+        if (q != null) {
+            tail.next = q;
+        }
         return head.next;
     }
 
     public static void main(String[] args) {
-        int[] a = new int[]{5, 6, 78, 24, 65, 87, 12, 3, 57, 89, 54, 25};
+        int[] a = new int[]{5};
         ListNode head = new ListNode(-1);
         for (int i : a) {
             ListNode p = new ListNode(i);
@@ -69,7 +75,7 @@ public class ListNode {
         head = head.sortList(head.next);
         ListNode p = head;
         while ((p = p.next) != null) {
-            System.out.print(p + " ");
+            System.out.print(p.val + " ");
         }
         System.out.println();
     }
